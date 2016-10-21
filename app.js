@@ -11,16 +11,28 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const app = express();
-const fs = require("fs");
 
 // PORT
 const PORT = (process.env.PORT || 3000);
+// ENVIRONMENT
+const ENV = process.env.NODE_ENV || "development";
 
 // Timestamp logger
 require('console-stamp')(console, { pattern : "dd/mm/yyyy HH:MM:ss.l" });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Auth (Cheesy)
+if(ENV === "production") {
+  app.use((req, res, next) => {
+    if(process.env.APP_SECRET !== req.body.app_secret) {
+      req.status(401).send();
+    } else {
+      next();
+    }
+  });
+};
 
 // Router
 app.use('/', require('./routes/index'));
@@ -41,7 +53,7 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, (req, res, next) => {
   console.log(`Running on port ${PORT}`);
-  console.log(`ENVIRONMENT: ${(process.env.NODE_ENV) ? "PRODUCTION" : "DEVELOPMENT"}`);
+  console.log(`ENVIRONMENT: ${ENV}`);
 });
 
 module.exports = app;
