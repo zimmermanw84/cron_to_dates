@@ -11,10 +11,14 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
+const mainController = require("../controllers/main");
 
 // Heartbeat test
 router.get("/", (req, res, next) => {
   res.send("OK");
 });
+
+// Cron Parser
+router.post("/calculate-crons", mainController.parserRequestHandler);
 
 module.exports = router;
