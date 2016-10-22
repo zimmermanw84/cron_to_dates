@@ -32,7 +32,7 @@ if(process.env.NODE_ENV == "production") {
         process.env.APP_ID === req.query.app_id) {
       return next();
     } else {
-      return req.status(401).send();
+      return res.status(401).send();
     }
   });
 };
