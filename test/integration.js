@@ -72,7 +72,9 @@ describe(`Sanity Check`, () => {
 
 describe(`Integration Tests`, () => {
   describe(`Invalid Route`, () => {
-    it("Should return http response code 404");
+    it("Should return http response code 404", (done) => {
+      api.get('/some-missing-route').expect(404, done);
+    });
   });
 
   describe(`POST /calculate-crons`, () => {
