@@ -23,13 +23,16 @@ require('console-stamp')(console, { pattern : "dd/mm/yyyy HH:MM:ss.l" });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Auth (Naive)
-if(ENV === "production") {
+console.log(ENV);
+
+// // Auth (Naive)
+if(process.env.NODE_ENV == "production") {
   app.use((req, res, next) => {
-    if(process.env.APP_SECRET !== req.body.app_secret) {
-      req.status(401).send();
+    if(process.env.APP_SECRET === req.query.app_secret &&
+        process.env.APP_ID === req.query.app_id) {
+      return next();
     } else {
-      next();
+      return req.status(401).send();
     }
   });
 };
