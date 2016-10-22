@@ -15,27 +15,42 @@ const cronParser = require('cron-parser');
  */
 module.exports = class FrequencyRequest {
   constructor(requestData) {
-    if(requestData) {
-      this.startDate = new Date(requestData.start_date);
-      this.endDate = new Date(requestData.end_date);
-      this.frequencies = requestData.frequencies || [];
-    }
+    requestData = requestData || {};
+    this.startDate = new Date(requestData.start_date);
+    this.endDate = new Date(requestData.end_date);
+    this.frequencies = requestData.frequencies || [];
 
+    // Naive validation
+    if(!this._isValid()) {
+      throw new TypeError("Invalid Request Data");
+    }
   };
 
   /**
    * @function _buildReponse
-   * @private
+   * @public
    * @return {Object}
    */
-  _buildReponse() {};
+  buildReponse() {
+    let response = {};
 
-  /**
-   * @function _orderCrons
-   * @private
-   * @return {Void} - Side Effects
-   */
-  _orderCrons() {};
+    // Iterate throught all frequencies
+    this.frequencies.forEach((frequencyObj) => {
+      // Assign the name value to the key of the response object
+      // and the value will be the return value of parse cron
+      response[frequencyObj["name"]] = frequencyObj["crons"].reduce((prev, cron) => {
+        // Concat all results from _parseCron
+        return prev.concat(this._parseCron(cron));
+      }, []);
+
+      // While we are in this loop it seems like a reasonable time to sort
+      // So we don't need to run another nested loop
+      // In place (Destructive)
+      response[frequencyObj["name"]].sort();
+    });
+
+    return response;
+  };
 
   /**
    * @function _parseCron
@@ -83,10 +98,41 @@ module.exports = class FrequencyRequest {
   };
 
   /**
-   * @function _buildFrequenciesToISO
+   * @function _validate
    * @private
-   * @return {Array}
+   * @return {Boolean}
    */
-  _buildFrequenciesToISO() {};
-
+  _isValid() {
+    // We're going to check to see if the dates are valid before we proceed
+    // Checking for null values first then make sure start_date < end_date
+    // And frequencies is an array type
+    return (this.startDate && this.endDate) &&
+            (this.startDate < this.endDate) && (this.frequencies instanceof Array);
+  };
 };
+
+// let test = new FrequencyRequest({
+//   "start_date": "2016-02-01T08:00:00.000Z",
+//   "end_date": "2016-02-28T08:00:00.000Z",
+//   "frequencies": [
+//       {
+//         "name": "Monthly",
+//         "crons": ["0 0 0 25 * *"]
+//       },
+//       {
+//         "name": "BiWeekly",
+//         "crons": ["0 0 0 20 * *", "0 0 0 10 * *"]
+//       },
+//       {
+//         "name": "Weekly",
+//         "crons": ["0 0 0 * * 5"]
+//       },
+//       {
+//         "name": "Quarterly",
+//         "crons": ["0 0 0 25 3 *", "0 0 0 27 6 *", "0 0 0 30 9 *", "0 0 0 22 12 *", "0 0 0 25 3 *"]
+//       }
+//     ]
+//   }
+// );
+
+// console.log(test.buildReponse());
