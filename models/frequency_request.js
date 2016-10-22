@@ -16,10 +16,8 @@ const cronParser = require('cron-parser');
 module.exports = class FrequencyRequest {
   constructor(requestData) {
     requestData = requestData || {};
-    // this.startDate = new Date(requestData.start_date);
-    this.startDate = requestData.start_date;
-    this.endDate = requestData.end_date;
-    // this.endDate = new Date(requestData.end_date);
+    this.startDate = new Date(requestData.start_date);
+    this.endDate = new Date(requestData.end_date);
     this.frequencies = requestData.frequencies || [];
 
     // Naive validation

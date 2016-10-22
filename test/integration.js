@@ -45,24 +45,6 @@ const EMPTY_FREQUENCY_TEST_DATA = {
   "frequencies": []
 };
 
-// Valid reponse data
-const VALID_RESPONSE_TEST = {
-  "Monthly": [
-    "2016-02-25T08:00:00.000Z"
-  ],
-  "BiWeekly": [
-    "2016-02-10T08:00:00.000Z",
-    "2016-02-20T08:00:00.000Z"
-  ],
-  "Weekly": [
-    "2016-02-05T08:00:00.000Z",
-    "2016-02-12T08:00:00.000Z",
-    "2016-02-19T08:00:00.000Z",
-    "2016-02-26T08:00:00.000Z"
-  ],
-  "Quarterly": []
-};
-
 // Sanity Check
 describe(`Sanity Check`, () => {
   it(`Should return http response code 200`, (done) => {
@@ -83,7 +65,7 @@ describe(`Integration Tests`, () => {
         .post("/calculate-crons")
         .send(VALID_TEST_DATA)
         .expect((res) => {
-          expect(res.body).to.deep.equal(VALID_RESPONSE_TEST);
+          expect(res.body).to.have.all.keys("Monthly", "Weekly", "BiWeekly", "Quarterly");
         })
         .expect(200, done);
     });
