@@ -27,11 +27,11 @@ module.exports = class FrequencyRequest {
   };
 
   /**
-   * @function _buildReponse
+   * @function _buildResponse
    * @public
    * @return {Object}
    */
-  buildReponse() {
+  buildResponse() {
     let response = {};
 
     // Iterate throught all frequencies
@@ -110,29 +110,3 @@ module.exports = class FrequencyRequest {
             (this.startDate < this.endDate) && (this.frequencies instanceof Array);
   };
 };
-
-// let test = new FrequencyRequest({
-//   "start_date": "2016-02-01T08:00:00.000Z",
-//   "end_date": "2016-02-28T08:00:00.000Z",
-//   "frequencies": [
-//       {
-//         "name": "Monthly",
-//         "crons": ["0 0 0 25 * *"]
-//       },
-//       {
-//         "name": "BiWeekly",
-//         "crons": ["0 0 0 20 * *", "0 0 0 10 * *"]
-//       },
-//       {
-//         "name": "Weekly",
-//         "crons": ["0 0 0 * * 5"]
-//       },
-//       {
-//         "name": "Quarterly",
-//         "crons": ["0 0 0 25 3 *", "0 0 0 27 6 *", "0 0 0 30 9 *", "0 0 0 22 12 *", "0 0 0 25 3 *"]
-//       }
-//     ]
-//   }
-// );
-
-// console.log(test.buildReponse());
