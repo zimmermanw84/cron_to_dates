@@ -16,8 +16,8 @@ const cronParser = require('cron-parser');
 module.exports = class FrequencyRequest {
   constructor(requestData) {
     if(requestData) {
-      this.startDate = requestData.start_date;
-      this.endDate = requestData.end_date;
+      this.startDate = new Date(requestData.start_date);
+      this.endDate = new Date(requestData.end_date);
       this.frequencies = requestData.frequencies || [];
     }
 
@@ -41,28 +41,45 @@ module.exports = class FrequencyRequest {
    * @function _parseCron
    * @private
    * @param cron {String}
-   * @return {Date - ISO}
+   * @return {Array}
    */
   _parseCron(cron) {
+    // parser options
     let parserOptions = {
-      currentDate: new Date(this.startDate),
-      endDate: new Date(this.endDate),
+      currentDate: this.startDate,
+      endDate: this.endDate,
       iterator: true
     };
 
     // Date Iso strings
+    // Using a Set to prevent dups
     let dateISOStrings = new Set();
 
     try {
-      var interval = cronParser.parseExpression(cron, options);
-
+      var interval = cronParser.parseExpression(cron, parserOptions);
+      let dateObject;
+      // Good usecase to dust off a do-while loop
       do {
-        let obj = interval.next();
-        obj.value.toISOString();
-      } while (!obj.done);
+        // The next iterable
+        dateObject = interval.next();
+        // Only caching value for readablility
+        let value = dateObject.value.toISOString();
+
+        // If value does not exist already add to set
+        if(value && !dateISOStrings.has(value)) {
+          dateISOStrings.add(value);
+        }
+        // Run loop while there is a next date Object
+      } while (!dateObject.done);
     } catch (err) {
-      console.log('Error: ' + err.message);
+      // "Out of the timespan range" Error Is not an error for the purpose of this exercise
+      if(err.message !== "Out of the timespan range") {
+        console.error(err.stack);
+      }
     };
+
+    // Return an array
+    return Array.from(dateISOStrings);
   };
 
   /**
