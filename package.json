@@ -4,7 +4,8 @@
   "description": "Cron to Dates API",
   "main": "app.js",
   "scripts": {
-    "test": "NODE_ENV='test' mocha test/"
+    "test": "NODE_ENV='test' mocha test/",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
