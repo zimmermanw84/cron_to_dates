@@ -48,17 +48,17 @@ const EMPTY_FREQUENCY_TEST_DATA = {
 // Valid response data
 const VALID_RESPONSE_DATA = {
   "Monthly":[
-    "2016-02-25T08:00:00.000Z"
+    "2016-02-25T00:00:00.000Z"
   ],
   "Weekly":[
-    "2016-02-05T08:00:00.000Z",
-    "2016-02-12T08:00:00.000Z",
-    "2016-02-19T08:00:00.000Z",
-    "2016-02-26T08:00:00.000Z"
+    "2016-02-05T00:00:00.000Z",
+    "2016-02-12T00:00:00.000Z",
+    "2016-02-19T00:00:00.000Z",
+    "2016-02-26T00:00:00.000Z"
   ],
   "BiWeekly":[
-    "2016-02-10T08:00:00.000Z",
-    "2016-02-20T08:00:00.000Z"
+    "2016-02-10T00:00:00.000Z",
+    "2016-02-20T00:00:00.000Z"
   ],
   "Quarterly":[]
 };
@@ -77,6 +77,7 @@ describe(`Integration Tests`, () => {
     });
   });
 
+  // TEST IS DEPENDENT ON ENVIRONMENT DATETIME TO BE SET TO UTC
   describe(`POST /calculate-crons`, () => {
     it("Should return a valid response given valid request body: http response code 200", (done) => {
       api

@@ -65,7 +65,7 @@ module.exports = class FrequencyRequest {
       endDate: this.endDate,
       iterator: true
     };
-    console.log("START END TIME", this.startDate, this.endDate)
+
     // Date Iso strings
     // Using a Set to prevent dups
     let dateISOStrings = new Set();
@@ -79,8 +79,6 @@ module.exports = class FrequencyRequest {
         dateObject = interval.next();
         // Only caching value for readablility
         let value = dateObject.value.toISOString();
-        console.log("VALUE", value)
-        console.log("HELLO SEE IF WE CAN DIFF",new Date(dateObject.value).toISOString());
 
         // If value does not exist already add to set
         if(value && !dateISOStrings.has(value)) {
