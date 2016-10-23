@@ -114,7 +114,7 @@ curl --verbose --insecure -X POST -H "Content-Type: application/json" -H "Cache-
 }' "https://ec2-54-67-99-63.us-west-1.compute.amazonaws.com/calculate-crons?app_secret=<APP_SECRET>&app_id=<APP_ID>"
 ```
 
-## Contribuing  
+## Contributing  
 ####
 Requirements:
  - Node.js (v4.2.3) & NPM  
