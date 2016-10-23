@@ -27,6 +27,9 @@ Create an API that accepts a json payload of cron strings, and returns a json pa
 
 ## API
 
+##### Host: ec2-54-67-99-63.us-west-1.compute.amazonaws.com
+##### Protocol: HTTPS  
+
 ```
 POST /calculate-crons
 BODY: <JSON>
