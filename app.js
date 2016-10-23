@@ -23,9 +23,7 @@ require('console-stamp')(console, { pattern : "dd/mm/yyyy HH:MM:ss.l" });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-console.log(ENV);
-
-// // Auth (Naive)
+// Auth (Naive)
 if(process.env.NODE_ENV == "production") {
   app.use((req, res, next) => {
     if(process.env.APP_SECRET === req.query.app_secret &&
