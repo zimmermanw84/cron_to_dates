@@ -1,5 +1,6 @@
 # Cron To Dates
 [![Build Status](https://travis-ci.org/zimmermanw84/phone-auth.png?branch=master)](https://travis-ci.org/zimmermanw84/cron_to_dates)
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 ## Mission
 Create an API that accepts a json payload of cron strings, and returns a json payload of valid (within a given datetime range) dates for these strings.  
