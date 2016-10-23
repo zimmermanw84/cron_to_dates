@@ -98,7 +98,7 @@ module.exports = class FrequencyRequest {
   };
 
   /**
-   * @function _validate
+   * @function _isValid
    * @private
    * @return {Boolean}
    */
