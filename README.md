@@ -3,7 +3,7 @@
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 ## Mission
-Create an API that accepts a json payload of cron strings, and returns a json payload of valid (within a given datetime range) dates for these strings.  
+Create an API that accepts a json payload of cron strings, and returns a json payload of valid (within a given datetime range) dates for these strings.
 
 #### Frequency Object Example
 ```
@@ -28,7 +28,7 @@ Create an API that accepts a json payload of cron strings, and returns a json pa
 ## API
 
 ##### Host: ec2-54-67-99-63.us-west-1.compute.amazonaws.com
-##### Protocol: HTTPS  
+##### Protocol: HTTPS
 
 ```
 POST /calculate-crons
@@ -40,7 +40,7 @@ BODY: <JSON>
 }
 ```
 
-Example request object.  
+Example request object.
 POST Body:
 ```
 {
@@ -66,9 +66,9 @@ POST Body:
   ]
 }
 ```
-Retruns a JSON response object. Properies are the name values of the requested frequencies and the values are arrays of datetime-utc (ISO String format) in acending order.  
+Retruns a JSON response object. Properies are the name values of the requested frequencies and the values are arrays of datetime-utc (ISO String format) in acending order.
 
-Example response.  
+Example response.
 ```
 {
   "Monthly":[
@@ -90,7 +90,7 @@ Example response.
 
 ## Sample Curl request
 
-Use the [--insecure] flag with the curl request. Application uses a self signed certificate. The host only accepts HTTPS protocol. 
+Use the [--insecure] flag with the curl request. Application uses a self signed certificate. The host only accepts HTTPS protocol.
 
 ```
 curl --verbose --insecure -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d '{
@@ -117,24 +117,24 @@ curl --verbose --insecure -X POST -H "Content-Type: application/json" -H "Cache-
 }' "https://ec2-54-67-99-63.us-west-1.compute.amazonaws.com/calculate-crons?app_secret=<APP_SECRET>&app_id=<APP_ID>"
 ```
 
-## Contributing  
+## Run Locally
 ####
 Requirements:
- - Node.js (v4.2.3) & NPM  
- - Mocha.js  
+ - Node.js (v4.2.3) & NPM
+ - Mocha.js
 
 Note: A test will fail if you don't have your computer's time set to UTC
 
-Clone repo  
+Clone repo
 ```
 $ git clone <this repo>
 ```
-Install packages  
+Install packages
 ```
 $ cd <repo>
 $ <sudo may apply> npm install
 ```
-Run tests  
+Run tests
 ```
 $ npm run test
 ```
