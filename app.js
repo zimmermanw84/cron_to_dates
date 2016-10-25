@@ -15,7 +15,7 @@ const app = express();
 // PORT
 const PORT = (process.env.PORT || 3000);
 // ENVIRONMENT
-const ENV = process.env.NODE_ENV || "development";
+const ENV = (process.env.NODE_ENV || "development");
 
 // Timestamp logger
 require('console-stamp')(console, { pattern : "dd/mm/yyyy HH:MM:ss.l" });

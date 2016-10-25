@@ -1,5 +1,5 @@
 //
-//  controllers/frequency_request.js
+//  models/frequency_request.js
 //
 //  Created by Walt Zimmerman on 8/24/16.
 //
@@ -27,7 +27,7 @@ module.exports = class FrequencyRequest {
   };
 
   /**
-   * @function _buildResponse
+   * @function buildResponse
    * @public
    * @return {Object}
    */
